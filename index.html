@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Meteorology Study Hub - a personal meteorological workstation for weather analysis, observation, forecasting and atmospheric science."
+    >
+
+    <title>Meteorology Study Hub</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div class="app-shell">
+
+        <!-- MOBILE HEADER -->
+        <header class="mobile-header">
+            <button id="menuButton" class="icon-button" aria-label="Open navigation">
+                ☰
+            </button>
+
+            <div class="mobile-brand">
+                <span class="brand-mark">☁</span>
+                <span>Meteorology Hub</span>
+            </div>
+
+            <button id="mobileRefresh" class="icon-button" aria-label="Refresh weather">
+                ↻
+            </button>
+        </header>
+
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+
+            <div class="brand">
+                <div class="brand-mark">☁</div>
+
+                <div>
+                    <strong>Meteorology</strong>
+                    <span>Study Hub</span>
+                </div>
+            </div>
+
+            <div class="sidebar-status">
+                <span class="status-dot"></span>
+                METEOROLOGICAL WORKSTATION
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <a href="#dashboard" class="nav-link active">
+                    <span>⌂</span>
+                    Dashboard
+                </a>
+
+                <a href="#liveWeather" class="nav-link">
+                    <span>◉</span>
+                    Live Weather
+                </a>
+
+                <a href="#analytics" class="nav-link">
+                    <span>⌁</span>
+                    Analytics
+                </a>
+
+                <a href="#tools" class="nav-link">
+                    <span>⚙</span>
+                    Tools
+                </a>
+
+                <a href="#observation" class="nav-link">
+                    <span>▤</span>
+                    Observations
+                </a>
+
+                <a href="#metar" class="nav-link">
+                    <span>✈</span>
+                    METAR
+                </a>
+
+                <a href="#clouds" class="nav-link">
+                    <span>☁</span>
+                    Cloud Lab
+                </a>
+
+                <a href="#formulas" class="nav-link">
+                    <span>∑</span>
+                    Formula Hub
+                </a>
+
+                <a href="#resources" class="nav-link">
+                    <span>▣</span>
+                    Resources
+                </a>
+
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="mini-station">
+                    <span class="status-dot"></span>
+                    <div>
+                        <strong id="sidebarStatus">System Ready</strong>
+                        <small>Open-Meteo data engine</small>
+                    </div>
+                </div>
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN -->
+        <main class="main-content">
+
+            <!-- DASHBOARD -->
+            <section id="dashboard" class="page-section hero-section">
+
+                <div class="hero-content">
+
+                    <div class="eyebrow">
+                        <span></span>
+                        PERSONAL METEOROLOGICAL WORKSTATION
+                    </div>
+
+                    <h1>
+                        Study the atmosphere.
+                        <span>Read the weather.</span>
+                    </h1>
+
+                    <p>
+                        A personal meteorology dashboard for observing,
+                        analysing and understanding atmospheric conditions.
+                    </p>
+
+                    <div class="hero-actions">
+                        <button class="primary-button" id="exploreButton">
+                            Explore workstation →
+                        </button>
+
+                        <button class="secondary-button" id="heroLocationButton">
+                            📍 Use my location
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="hero-atmosphere">
+
+                    <div class="orbit orbit-one"></div>
+                    <div class="orbit orbit-two"></div>
+                    <div class="orbit orbit-three"></div>
+
+                    <div class="atmosphere-core">
+                        <span>☁</span>
+                        <small>ATMOSPHERE</small>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- STATS -->
+            <section class="stats-grid">
+
+                <article class="stat-card cyan">
+                    <div class="stat-icon">🌡️</div>
+                    <div>
+                        <span>Temperature</span>
+                        <strong id="statTemperature">-- °C</strong>
+                    </div>
+                </article>
+
+                <article class="stat-card blue">
+                    <div class="stat-icon">💧</div>
+                    <div>
+                        <span>Humidity</span>
+                        <strong id="statHumidity">-- %</strong>
+                    </div>
+                </article>
+
+                <article class="stat-card purple">
+                    <div class="stat-icon">◉</div>
+                    <div>
+                        <span>Pressure</span>
+                        <strong id="statPressure">-- hPa</strong>
+                    </div>
+                </article>
+
+                <article class="stat-card green">
+                    <div class="stat-icon">💨</div>
+                    <div>
+                        <span>Wind</span>
+                        <strong id="statWind">-- km/h</strong>
+                    </div>
+                </article>
+
+            </section>
+
+
+            <!-- LIVE WEATHER -->
+            <section id="liveWeather" class="page-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-label">LIVE DATA</span>
+                        <h2>Atmospheric Conditions</h2>
+                        <p>Model-based weather data for your selected location.</p>
+                    </div>
+
+                    <div class="data-source">
+                        <span class="status-dot"></span>
+                        Open-Meteo
+                    </div>
+
+                </div>
+
+
+                <div class="location-bar">
+
+                    <div class="search-box">
+                        <span>⌕</span>
+                        <input
+                            type="text"
+                            id="locationInput"
+                            value="Ogbomoso, Nigeria"
+                            placeholder="Search city or location..."
+                        >
+                    </div>
+
+                    <button class="secondary-button" id="useLocation">
+                        📍 My location
+                    </button>
+
+                    <button class="primary-button" id="loadWeather">
+                        Load weather
+                    </button>
+
+                    <button class="icon-button large" id="refreshWeather">
+                        ↻
+                    </button>
+
+                </div>
+
+
+                <div id="stationStatus" class="station-status">
+                    <span class="status-dot"></span>
+                    Ready
+                </div>
+
+
+                <!-- STATION META -->
+                <div class="station-meta-grid">
+
+                    <div class="meta-card">
+                        <span>Location</span>
+                        <strong id="stationLocation">--</strong>
+                    </div>
+
+                    <div class="meta-card">
+                        <span>Latitude</span>
+                        <strong id="stationLatitude">--</strong>
+                    </div>
+
+                    <div class="meta-card">
+                        <span>Longitude</span>
+                        <strong id="stationLongitude">--</strong>
+                    </div>
+
+                    <div class="meta-card">
+                        <span>Elevation</span>
+                        <strong id="stationElevation">-- m</strong>
+                    </div>
+
+                    <div class="meta-card">
+                        <span>Timezone</span>
+                        <strong id="stationTimezone">--</strong>
+                    </div>
+
+                </div>
+
+
+                <!-- CURRENT WEATHER -->
+                <div class="current-weather-grid">
+
+                    <article class="current-main glass-card">
+
+                        <div class="weather-icon-large" id="weatherIcon">
+                            ☁
+                        </div>
+
+                        <div class="current-main-info">
+                            <span id="weatherDescription">Waiting for weather data</span>
+
+                            <strong id="currentTemperature">
+                                --°C
+                            </strong>
+
+                            <small id="weatherTime">
+                                --
+                            </small>
+                        </div>
+
+                    </article>
+
+
+                    <article class="weather-metric-card">
+                        <span>Feels Like</span>
+                        <strong id="apparentTemperature">-- °C</strong>
+                    </article>
+
+                    <article class="weather-metric-card">
+                        <span>Dew Point</span>
+                        <strong id="currentDewPoint">-- °C</strong>
+                    </article>
+
+                    <article class="weather-metric-card">
+                        <span>Humidity</span>
+                        <strong id="currentHumidity">-- %</strong>
+                    </article>
+
+                    <article class="weather-metric-card">
+                        <span>Pressure</span>
+                        <strong id="currentPressure">-- hPa</strong>
+                    </article>
+
+                    <article class="weather-metric-card">
+                        <span>Wind</span>
+                        <strong id="currentWind">-- km/h</strong>
+                    </article>
+
+                    <article class="weather-metric-card">
+                        <span>Direction</span>
+                        <strong id="currentWindDirection">--</strong>
+                    </article>
+
+                    <article class="weather-metric-card">
+                        <span>Cloud Cover</span>
+                        <strong id="currentCloud">-- %</strong>
+                    </article>
+
+                    <article class="weather-metric-card">
+                        <span>Precipitation</span>
+                        <strong id="currentRain">-- mm</strong>
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- ANALYTICS -->
+            <section id="analytics" class="page-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-label">ANALYTICS</span>
+                        <h2>Atmospheric Trends</h2>
+                        <p>Explore the next 24 hours of forecast variables.</p>
+                    </div>
+
+                    <select id="chartVariable" class="select-control">
+                        <option value="temperature">Temperature</option>
+                        <option value="humidity">Relative Humidity</option>
+                        <option value="pressure">Pressure</option>
+                        <option value="wind">Wind Speed</option>
+                        <option value="cloud">Cloud Cover</option>
+                    </select>
+
+                </div>
+
+
+                <div class="chart-card">
+
+                    <div class="chart-header">
+                        <div>
+                            <span>24-HOUR TREND</span>
+                            <h3 id="chartTitle">Temperature</h3>
+                        </div>
+
+                        <span class="chart-live">
+                            ● LIVE MODEL DATA
+                        </span>
+                    </div>
+
+                    <div class="chart-wrapper">
+                        <canvas id="weatherChart"></canvas>
+                    </div>
+
+                </div>
+
+
+                <!-- WEATHER STATISTICS -->
+                <div class="analytics-grid">
+
+                    <article class="analytics-card">
+                        <span>24H Maximum</span>
+                        <strong id="maxValue">--</strong>
+                    </article>
+
+                    <article class="analytics-card">
+                        <span>24H Minimum</span>
+                        <strong id="minValue">--</strong>
+                    </article>
+
+                    <article class="analytics-card">
+                        <span>24H Mean</span>
+                        <strong id="meanValue">--</strong>
+                    </article>
+
+                    <article class="analytics-card">
+                        <span>Trend</span>
+                        <strong id="trendValue">--</strong>
+                    </article>
+
+                </div>
+
+
+                <!-- HOURLY -->
+                <div class="subsection-heading">
+                    <h3>Hourly Forecast</h3>
+                    <span>Next 12 hours</span>
+                </div>
+
+                <div id="hourlyForecast" class="hourly-grid">
+                    <div class="loading-card">Loading forecast...</div>
+                </div>
+
+
+                <!-- DAILY -->
+                <div class="subsection-heading">
+                    <h3>7-Day Outlook</h3>
+                    <span>Forecast overview</span>
+                </div>
+
+                <div id="dailyForecast" class="daily-grid">
+                    <div class="loading-card">Loading forecast...</div>
+                </div>
+
+            </section>
+
+
+            <!-- TOOLS -->
+            <section id="tools" class="page-section">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">WORKSTATION TOOLS</span>
+                        <h2>Meteorological Toolkit</h2>
+                        <p>Practical tools for analysis and study.</p>
+                    </div>
+                </div>
+
+
+                <div class="tool-grid">
+
+                    <a href="#calculator" class="tool-card">
+                        <span class="tool-number">01</span>
+                        <div class="tool-icon">💧</div>
+                        <h3>Relative Humidity</h3>
+                        <p>Calculate RH from vapour pressure values.</p>
+                        <span class="tool-link">Open calculator →</span>
+                    </a>
+
+                    <a href="#observation" class="tool-card">
+                        <span class="tool-number">02</span>
+                        <div class="tool-icon">📝</div>
+                        <h3>Observation Log</h3>
+                        <p>Record and export your own weather observations.</p>
+                        <span class="tool-link">Open logger →</span>
+                    </a>
+
+                    <a href="#metar" class="tool-card">
+                        <span class="tool-number">03</span>
+                        <div class="tool-icon">✈️</div>
+                        <h3>METAR Decoder</h3>
+                        <p>Decode common aviation weather groups.</p>
+                        <span class="tool-link">Decode METAR →</span>
+                    </a>
+
+                    <a href="#clouds" class="tool-card">
+                        <span class="tool-number">04</span>
+                        <div class="tool-icon">☁️</div>
+                        <h3>Cloud Lab</h3>
+                        <p>Identify cloud genera and test your knowledge.</p>
+                        <span class="tool-link">Open cloud lab →</span>
+                    </a>
+
+                    <a href="#formulas" class="tool-card">
+                        <span class="tool-number">05</span>
+                        <div class="tool-icon">∑</div>
+                        <h3>Formula Hub</h3>
+                        <p>Search important meteorological equations.</p>
+                        <span class="tool-link">Open formulas →</span>
+                    </a>
+
+                </div>
+
+            </section>
+
+
+            <!-- MAJOR AREAS -->
+            <section class="page-section">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">DISCIPLINES</span>
+                        <h2>Major Areas of Meteorology</h2>
+                    </div>
+                </div>
+
+                <div class="discipline-grid">
+
+                    <article class="discipline-card">
+                        <span>01</span>
+                        <h3>Atmospheric Science</h3>
+                        <p>Study atmospheric structure, composition and processes.</p>
+                    </article>
+
+                    <article class="discipline-card">
+                        <span>02</span>
+                        <h3>Synoptic Meteorology</h3>
+                        <p>Analyse weather systems and large-scale atmospheric patterns.</p>
+                    </article>
+
+                    <article class="discipline-card">
+                        <span>03</span>
+                        <h3>Climatology</h3>
+                        <p>Understand long-term atmospheric behaviour and climate patterns.</p>
+                    </article>
+
+                    <article class="discipline-card">
+                        <span>04</span>
+                        <h3>Physical Meteorology</h3>
+                        <p>Explore radiation, clouds, precipitation and atmospheric optics.</p>
+                    </article>
+
+                    <article class="discipline-card">
+                        <span>05</span>
+                        <h3>Meteorological Instrumentation</h3>
+                        <p>Understand sensors, observations and automatic weather stations.</p>
+                    </article>
+
+                    <article class="discipline-card">
+                        <span>06</span>
+                        <h3>Numerical Weather Prediction</h3>
+                        <p>Explore how numerical models simulate the atmosphere.</p>
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- RH CALCULATOR -->
+            <section id="calculator" class="page-section">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">THERMODYNAMICS</span>
+                        <h2>Relative Humidity Calculator</h2>
+                        <p>RH = (e / es) × 100</p>
+                    </div>
+                </div>
+
+
+                <div class="calculator-layout">
+
+                    <div class="calculator-card">
+
+                        <label for="vapourPressure">
+                            Actual Vapour Pressure (e)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="vapourPressure"
+                            step="0.01"
+                            placeholder="e.g. 15"
+                        >
+
+                        <label for="saturationPressure">
+                            Saturation Vapour Pressure (es)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="saturationPressure"
+                            step="0.01"
+                            placeholder="e.g. 20"
+                        >
+
+                        <button class="primary-button full" id="calculateRH">
+                            Calculate RH
+                        </button>
+
+                    </div>
+
+
+                    <div class="result-card" id="rhResult">
+
+                        <span>RESULT</span>
+
+                        <strong>-- %</strong>
+
+                        <p>
+                            Enter vapour pressure values to calculate relative humidity.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- OBSERVATIONS -->
+            <section id="observation" class="page-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-label">MANUAL OBSERVATION</span>
+                        <h2>Weather Observation Log</h2>
+                        <p>Your own observations remain separate from model data.</p>
+                    </div>
+
+                    <button class="secondary-button" id="exportCSV">
+                        ↓ Export CSV
+                    </button>
+
+                </div>
+
+
+                <div class="observation-form">
+
+                    <div>
+                        <label>Temperature °C</label>
+                        <input type="number" id="obsTemperature" step="0.1">
+                    </div>
+
+                    <div>
+                        <label>Pressure hPa</label>
+                        <input type="number" id="obsPressure" step="0.1">
+                    </div>
+
+                    <div>
+                        <label>RH %</label>
+                        <input type="number" id="obsHumidity" min="0" max="100">
+                    </div>
+
+                    <div>
+                        <label>Wind Speed km/h</label>
+                        <input type="number" id="obsWindSpeed" min="0">
+                    </div>
+
+                    <div>
+                        <label>Wind Direction °</label>
+                        <input type="number" id="obsWindDirection" min="0" max="360">
+                    </div>
+
+                    <div>
+                        <label>Visibility km</label>
+                        <input type="number" id="obsVisibility" min="0" step="0.1">
+                    </div>
+
+                    <div>
+                        <label>Rainfall mm</label>
+                        <input type="number" id="obsRainfall" min="0" step="0.1">
+                    </div>
+
+                    <div>
+                        <label>Cloud Cover oktas</label>
+                        <input type="number" id="obsCloud" min="0" max="8">
+                    </div>
+
+                    <button class="primary-button" id="addObservation">
+                        + Add Observation
+                    </button>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Temp</th>
+                                <th>Pressure</th>
+                                <th>RH</th>
+                                <th>Wind</th>
+                                <th>Direction</th>
+                                <th>Visibility</th>
+                                <th>Rain</th>
+                                <th>Cloud</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="observationBody"></tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- METAR -->
+            <section id="metar" class="page-section">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">AVIATION METEOROLOGY</span>
+                        <h2>METAR Decoder</h2>
+                        <p>Decode common METAR groups for study and analysis.</p>
+                    </div>
+                </div>
+
+
+                <div class="metar-input">
+
+                    <input
+                        type="text"
+                        id="metarInput"
+                        value="DNAA 071200Z 24008KT 9999 SCT020 28/24 Q1012"
+                        placeholder="Enter METAR..."
+                    >
+
+                    <button class="primary-button" id="decodeMetar">
+                        Decode
+                    </button>
+
+                </div>
+
+
+                <div id="metarResult" class="metar-grid"></div>
+
+            </section>
+
+
+            <!-- CLOUD LAB -->
+            <section id="clouds" class="page-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-label">PHYSICAL METEOROLOGY</span>
+                        <h2>Cloud Identification Lab</h2>
+                        <p>Explore the ten recognised cloud genera.</p>
+                    </div>
+
+                    <select id="cloudSelect" class="select-control">
+                        <option value="">Select a cloud...</option>
+                    </select>
+
+                </div>
+
+
+                <div id="cloudResult" class="cloud-result">
+
+                    <div class="empty-state">
+                        <span>☁</span>
+                        <h3>Select a cloud genus</h3>
+                        <p>Its characteristics will appear here.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="quiz-header">
+
+                    <div>
+                        <span class="section-label">KNOWLEDGE CHECK</span>
+                        <h3>Cloud Identification Quiz</h3>
+                    </div>
+
+                    <div class="quiz-score">
+                        Score:
+                        <strong id="quizScore">0</strong>
+                    </div>
+
+                </div>
+
+
+                <div id="cloudQuiz" class="quiz-card"></div>
+
+            </section>
+
+
+            <!-- FORMULAS -->
+            <section id="formulas" class="page-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-label">REFERENCE</span>
+                        <h2>Meteorological Formula Hub</h2>
+                        <p>Search formulas by name or category.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="formula-controls">
+
+                    <input
+                        type="search"
+                        id="formulaSearch"
+                        placeholder="Search formulas..."
+                    >
+
+                    <select id="formulaCategory" class="select-control">
+                        <option value="all">All categories</option>
+                        <option value="humidity">Humidity</option>
+                        <option value="thermodynamics">Thermodynamics</option>
+                        <option value="atmosphere">Atmosphere</option>
+                        <option value="pressure">Pressure</option>
+                        <option value="wind">Wind</option>
+                    </select>
+
+                </div>
+
+
+                <div id="formulaGrid" class="formula-grid"></div>
+
+            </section>
+
+
+            <!-- TECHNOLOGY -->
+            <section id="technology" class="page-section">
+
+                <div class="technology-panel">
+
+                    <div class="technology-content">
+
+                        <span class="section-label">METEOROLOGY × TECHNOLOGY</span>
+
+                        <h2>
+                            From weather observations
+                            to an Automatic Weather Station.
+                        </h2>
+
+                        <p>
+                            This workstation is designed as a foundation for
+                            future integration with sensors, Arduino,
+                            Internet of Things systems and real weather stations.
+                        </p>
+
+                        <div class="tech-tags">
+                            <span>Arduino</span>
+                            <span>Temperature Sensor</span>
+                            <span>Humidity Sensor</span>
+                            <span>Barometer</span>
+                            <span>Anemometer</span>
+                            <span>Rain Gauge</span>
+                            <span>Automatic Weather Station</span>
+                            <span>IoT</span>
+                        </div>
+
+                    </div>
+
+                    <div class="technology-visual">
+                        <div class="sensor-ring">
+                            <span>◎</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- RESOURCES -->
+            <section id="resources" class="page-section">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">LEARNING</span>
+                        <h2>Meteorology Resources</h2>
+                    </div>
+                </div>
+
+
+                <div class="resource-grid">
+
+                    <a
+                        href="https://wmo.int/"
+                        target="_blank"
+                        rel="noopener"
+                        class="resource-card"
+                    >
+                        <span>WMO</span>
+                        <h3>World Meteorological Organization</h3>
+                        <p>International meteorological standards and resources.</p>
+                        <strong>Visit →</strong>
+                    </a>
+
+                    <a
+                        href="https://nimet.gov.ng/"
+                        target="_blank"
+                        rel="noopener"
+                        class="resource-card"
+                    >
+                        <span>NiMet</span>
+                        <h3>Nigerian Meteorological Agency</h3>
+                        <p>Official meteorological information for Nigeria.</p>
+                        <strong>Visit →</strong>
+                    </a>
+
+                    <a
+                        href="https://open-meteo.com/"
+                        target="_blank"
+                        rel="noopener"
+                        class="resource-card"
+                    >
+                        <span>DATA</span>
+                        <h3>Open-Meteo</h3>
+                        <p>Weather model data powering the live dashboard.</p>
+                        <strong>Visit →</strong>
+                    </a>
+
+                    <a
+                        href="https://aviationweather.gov/"
+                        target="_blank"
+                        rel="noopener"
+                        class="resource-card"
+                    >
+                        <span>AVIATION</span>
+                        <h3>Aviation Weather Center</h3>
+                        <p>Useful aviation weather and METAR resources.</p>
+                        <strong>Visit →</strong>
+                    </a>
+
+                </div>
+
+            </section>
+
+
+            <!-- QUICK CHECK -->
+            <section class="page-section">
+
+                <div class="quick-check">
+
+                    <div>
+                        <span class="section-label">QUICK CHECK</span>
+
+                        <h2>
+                            What instrument measures
+                            atmospheric pressure?
+                        </h2>
+                    </div>
+
+                    <div class="quick-options">
+
+                        <button data-answer="wrong">
+                            Thermometer
+                        </button>
+
+                        <button data-answer="correct">
+                            Barometer
+                        </button>
+
+                        <button data-answer="wrong">
+                            Hygrometer
+                        </button>
+
+                        <button data-answer="wrong">
+                            Anemometer
+                        </button>
+
+                    </div>
+
+                    <p id="quickFeedback"></p>
+
+                </div>
+
+            </section>
+
+
+            <!-- FOOTER -->
+            <footer class="footer">
+
+                <div>
+                    <strong>Meteorology Study Hub</strong>
+                    <span>Personal Meteorological Workstation</span>
+                </div>
+
+                <div>
+                    Built for learning, analysis and experimentation.
+                </div>
+
+                <div>
+                    <span id="footerYear"></span> ©
+                </div>
+
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
